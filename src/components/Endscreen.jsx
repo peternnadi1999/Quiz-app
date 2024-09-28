@@ -4,7 +4,12 @@ import { Quizcontext } from "../context/context";
 
 const Endscreen =()=>{
 
-    const {score, game, setGame}= useContext(Quizcontext);
+    const {score,setScore, game, setGame}= useContext(Quizcontext);
+
+    const restart=()=>{
+        setScore(0);
+        setGame("quiz")
+    }
 return(
 
 
@@ -16,7 +21,7 @@ return(
                 <div className="flex w-full flex-col items-center m-auto">
 
             <p className="font-bold text-lg  text-gray-900 text-center">{score}/ {ethereumQuiz.length}</p>
-            <button className="bg-gray-500 text-white hover:bg-neutral-500 w-1/2 p-2 rounded-md" onClick={()=>setGame("quiz")}>Restart Quiz</button>
+            <button className="bg-gray-500 text-white hover:bg-neutral-500 w-1/2 p-2 rounded-md" onClick={restart}>Restart Quiz</button>
                 </div>
             </div>
         </div>
