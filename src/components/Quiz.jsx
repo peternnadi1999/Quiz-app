@@ -9,13 +9,14 @@ const Quiz = ()=>{
     const data= ethereumQuiz;
     const {score, setScore, game, setGame}= useContext(Quizcontext);
     const [selected, setSelected]= useState("") 
-    const [isAnswered, setIsAnswer]= useState(false);
+    const [isAnswered, setIsAnswered]= useState(false);
     
 
     const handleSelectedAnswer =(answer)=>{
         if(!isAnswered){
 
             setAnswer(answer);
+            
         }
         
     }
@@ -24,9 +25,12 @@ const Quiz = ()=>{
         if(data[currentQuestion].correctAnswer === answer){
             setScore(score + 1);
         }
+        setIsAnswered(true);
 
-        if(!isAnswered){
-        setCurrentQuestion(currentQuestion + 1);
+        if (currentQuestion + 1 < data.length) {
+            setCurrentQuestion(currentQuestion + 1);
+            setAnswer(""); 
+            setIsAnswered(false);  
         }
     }
 
@@ -42,10 +46,6 @@ const Quiz = ()=>{
         if (!isAnswered) {
             return option === answer ? "bg-gray-500 text-white" : "bg-gray-300";
         }
-
-        if (option === data[currentQuestion].correctAnswer) return "bg-green-600 text-white";
-        if (option === answer && option !== data[currentQuestion].correctAnswer) return "bg-red-600 text-white";
-        return "bg-gray-300"; 
     };
     return(
         <>
